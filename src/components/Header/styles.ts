@@ -1,71 +1,65 @@
-import styled from "styled-components";
-import { devices } from "../../devices";
+import styled, { css } from "styled-components";
 
 export const HeaderContainer = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-height: 6.5rem;
-    max-width: 1120px;
-    margin: 0 auto;
-
     width: 100%;
-
-    @media ${devices.mobileS} {
-        padding: 2rem 0.5rem;
-    }
-
-    @media ${devices.mobileM} {
-        padding: 2rem 0.5rem;
-    }
-
-    @media ${devices.mobileL} {
-        padding: 2rem 0.5rem;
-    }
-
-    @media ${devices.laptop} {
-        padding: 2rem 0.5rem;
-    }
-
-    @media ${devices.laptopL} {
-        padding: 2rem 0rem;
-    }
-`;
-
-export const LogoContainer = styled.div`
-    display: flex;
-`;
-
-export const ShoppingAreaContainer = styled.div`
+    height: 6.5rem;
+    background: ${(props) => props.theme.colors["base-background"]};
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+`;
+
+export const HeaderButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
     gap: 0.75rem;
 `;
 
-export const ButtonContainer = styled.button`
+interface HeaderButtonProps {
+    variant: "purple" | "yellow";
+}
+export const HeaderButton = styled.button<HeaderButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 4px;
+    min-width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 6px;
     border: none;
-    background: ${(props) => props.theme["--yellow-light"]};
-    border-radius: 6px;
-    height: 2.375rem;
-    width: 2.375rem;
-`;
+    padding: 0 0.5rem;
+    position: relative;
+    font-size: ${(props) => props.theme.textSizes["text-regular-s"]};
 
-export const LocaleContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.375rem;
-    border-radius: 6px;
-    padding: 0.5rem;
-    gap: 0.25rem;
-    background: ${(props) => props.theme["--purple-light"]};
+    ${({ variant, theme }) => css`
+        background: ${theme.colors[`brand-${variant}-light`]};
+        color: ${theme.colors[`brand-${variant}-dark`]};
+    `}
 
-    span {
-        color: ${(props) => props.theme["--purple-dark"]};
-    }
+    ${({ variant, theme }) =>
+        variant === "purple" &&
+        `
+            svg {
+                color: ${theme.colors[`brand-purple`]};
+            }
+        `}
+
+    ${({ variant, theme }) =>
+        variant === "yellow" &&
+        css`
+            svg {
+                color: ${theme.colors[`brand-yellow-dark`]};
+                margin-top: 4px;
+            }
+        `}
 `;
