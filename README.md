@@ -1,2 +1,2 @@
 # coffee-delivery-project
-Projeto feito em  ReactJS
+Projeto feito em  ReactJS -- Projeto em deselvovimento
